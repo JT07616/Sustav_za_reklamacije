@@ -89,7 +89,6 @@ def reklamacija():
                            search_values=search_values, is_search=False)
 
 
-
 @app.route('/uredi/<int:id>', methods=['POST'])
 @db_session
 def uredi_reklamaciju(id):
@@ -134,12 +133,13 @@ def obrisi_reklamaciju(id):
 def vizualizacija():
     reklamacije = select(r for r in Reklamacija)[:]
 
-    # Data for bar chart (Complaints per month)
     mjeseci_eng = [r.datum_reklamacije.strftime('%m') for r in reklamacije]
     mjeseci_hr = [calendar.month_name[int(month)] for month in mjeseci_eng]
     mjesec_broj = {mjesec: mjeseci_hr.count(mjesec) for mjesec in set(mjeseci_hr)}
-    labels_mjeseci = list(mjesec_broj.keys())
-    data_mjeseci = list(mjesec_broj.values())
+
+    mjeseci_po_redu = [calendar.month_name[i] for i in range(1, 13)]
+    labels_mjeseci = [mjesec for mjesec in mjeseci_po_redu if mjesec in mjesec_broj]
+    data_mjeseci = [mjesec_broj[mjesec] for mjesec in labels_mjeseci]
 
     status_broj = {"Obrađeno": 0, "Neobrađeno": 0}
     for r in reklamacije:
@@ -149,7 +149,6 @@ def vizualizacija():
 
     return render_template('vizualizacija.html', labels_mjeseci=labels_mjeseci, data_mjeseci=data_mjeseci,
                            labels_status=labels_status, data_status=data_status)
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
