@@ -1,4 +1,86 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const labelsMjeseciElement = document.getElementById('labels_mjeseci');
+    const dataMjeseciElement = document.getElementById('data_mjeseci');
+
+    const labelsMjeseci = JSON.parse(labelsMjeseciElement.textContent);
+    const dataMjeseci = JSON.parse(dataMjeseciElement.textContent);
+
+    var barCtx = document.getElementById('barChart').getContext('2d');
+    var barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+            labels: labelsMjeseci,
+            datasets: [{
+                label: 'Reklamacije po mjesecima',
+                data: dataMjeseci,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Mjeseci'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Broj reklamacija'
+                    }
+                }
+            }
+        }
+    });
+
+    var pieCtx = document.getElementById('pieChart').getContext('2d');
+    var pieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: JSON.parse(document.getElementById('labels_status').textContent),
+            datasets: [{
+                label: 'Status reklamacija',
+                data: JSON.parse(document.getElementById('data_status').textContent),
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
     var searchError = document.querySelector('.error-message');
     if (searchError && searchError.textContent.includes("Niti jedna reklamacija ne odgovara traženim vrijednostima.")) {
         showSearchForm();
@@ -68,77 +150,3 @@ window.sortReklamacije = sortReklamacije;
 window.confirmDelete = confirmDelete;
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    var barCtx = document.getElementById('barChart').getContext('2d');
-    var barChart = new Chart(barCtx, {
-        type: 'bar',
-        data: {
-            labels: JSON.parse(document.getElementById('barChart').dataset.labels),
-            datasets: [{
-                label: 'Reklamacije po mjesecima',
-                data: JSON.parse(document.getElementById('barChart').dataset.data),
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Mjeseci'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Broj reklamacija'
-                    }
-                }
-            }
-        }
-    });
-
-    var pieCtx = document.getElementById('pieChart').getContext('2d');
-    var pieChart = new Chart(pieCtx, {
-        type: 'pie',
-        data: {
-            labels: JSON.parse(document.getElementById('pieChart').dataset.labels),
-            datasets: [{
-                label: 'Status reklamacija',
-                data: JSON.parse(document.getElementById('pieChart').dataset.data),
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw;
-                        }
-                    }
-                }
-            }
-        }
-    });
-});
