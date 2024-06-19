@@ -21,17 +21,17 @@ Aplikacija "Sustav za reklamacije" omogućava korisnicima jednostavno praćenje 
 
 ## Pokretanje aplikacije
 
-- **Preuzimanje aplikacije**: Posjetite [GitHub repozitorij](https://github.com/JT07616/Sustav_za_reklamacije.git), kliknite na "Code" i preuzmite ZIP datoteku, zatim ekstraktirajte ZIP datoteku u željeni direktorij.
+1. **Preuzimanje aplikacije**: Posjetite [GitHub repozitorij](https://github.com/JT07616/Sustav_za_reklamacije.git), kliknite na "Code" i preuzmite ZIP datoteku, zatim ekstraktirajte ZIP datoteku u željeni direktorij.
 
-- **Ulazak u direktorij**: Otvorite terminal ili naredbeni redak i uđite u direktorij gdje ste ekstraktirali datoteku:
+2. **Ulazak u direktorij**: Otvorite terminal ili naredbeni redak i uđite u direktorij gdje ste ekstraktirali datoteku:
       ```sh
       cd Sustav_za_reklamacije
       ```
-- **Stvaranje Docker slike:** Upišite naredbu za stvaranje Docker slike:
+3. **Stvaranje Docker slike:** Upišite naredbu za stvaranje Docker slike:
       ```sh
       docker build -t reklamacija .
       ```
-- **Pokretanje Docker containera:** Upišite naredbu za pokretanje containera.
+4. **Pokretanje Docker containera:** Upišite naredbu za pokretanje containera.
       ```sh
       docker run -d -p 5001:8080 reklamacija
       ```
