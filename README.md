@@ -6,7 +6,7 @@ Aplikacija "Sustav za reklamacije" omogućava korisnicima jednostavno praćenje 
 
 ## Usecase dijagram
 
-![file](https://github.com/JT07616/Sustav_za_reklamacije/assets/170039228/63ee9ccf-5dac-45aa-aa81-83b522b7c3d2)
+![file (1)](https://github.com/JT07616/Sustav_za_reklamacije/assets/170039228/5d099dd5-47b3-44a1-b8a3-99317f654a01)
 
 
 
