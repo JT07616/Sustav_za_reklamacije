@@ -10,19 +10,14 @@ Aplikacija "Sustav za reklamacije" omogućava korisnicima jednostavno praćenje 
   <img src="https://github.com/JT07616/Sustav_za_reklamacije/assets/170039228/14148a44-a13f-4675-867e-3edee0e0182a" alt="file (2)">
 </p>
 
-Funkcionalnosti
+## Funkcionalnosti
 
-Unos reklamacija: Omogućava korisniku unos novih reklamacija u sustav.
-
-Pregled reklamacija: Omogućava korisniku pregled reklamacija na temelju unesenih parametara.
-
-Sortiranje reklamacija: Omogućava korisniku sortiranje reklamacija prema datumu ili broju narudžbe.
-
-Uređivanje reklamacija: Omogućava korisniku ažuriranje informacija za odabrane reklamacije.
-
-Brisanje reklamacija: Omogućava korisniku brisanje određenih reklamacija iz sustava.
-
-Vizualizacija reklamacija: Omogućava korisniku pregled grafičkih prikaza podataka o reklamacijama.
+- **Unos reklamacija**: Omogućava korisniku unos novih reklamacija u sustav.
+- **Pregled reklamacija**: Omogućava korisniku pregled reklamacija na temelju unesenih parametara.
+- **Sortiranje reklamacija**: Omogućava korisniku sortiranje reklamacija prema datumu ili broju narudžbe.
+- **Uređivanje reklamacija**: Omogućava korisniku ažuriranje informacija za odabrane reklamacije.
+- **Brisanje reklamacija**: Omogućava korisniku brisanje određenih reklamacija iz sustava.
+- **Vizualizacija reklamacija**: Omogućava korisniku pregled grafičkih prikaza podataka o reklamacijama.
 
 
 
