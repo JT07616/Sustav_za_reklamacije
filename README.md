@@ -21,28 +21,26 @@ Aplikacija "Sustav za reklamacije" omogućava korisnicima jednostavno praćenje 
 
 ## Pokretanje aplikacije
 
-1. **Preuzimanje aplikacije s GitHub-a**
-   - Klonirajte repozitorij na svoje računalo koristeći Git:
-     ```sh
-     git clone https://github.com/JT07616/Sustav_za_reklamacije.git
-     ```
 
-2. **Ulazak u direktorij**
-   - Uđite u direktorij u koji ste klonirali repozitorij:
+1. **Preuzimanje aplikacije**
+   - Posjetite URL: `https://github.com/JT07616/Sustav_za_reklamacije.git`
+   - Kliknite na gumb "Code" i preuzmite ZIP datoteku
+   - Ekstraktirajte ZIP datoteku u željeni direktorij
+
+2. **Ulazak u direktorij gdje se nalazi repozitorij**
+   - Otvorite terminal ili naredbeni redak i uđite u direktorij:
      ```sh
      cd Sustav_za_reklamacije
      ```
 
-3. **Kreiranje Docker slike**
-   - Kreirajte Docker sliku pomoću Dockerfile-a:
+3. **Stvaranje Docker slike pomoću Dockerfile-a**
+   - Pokrenite sljedeću naredbu za stvaranje Docker slike:
      ```sh
      docker build -t reklamacija .
      ```
 
-4. **Pokretanje aplikacije u Docker containeru**
-   - Pokrenite Docker container koristeći kreiranu sliku:
+4. **Pokretanje aplikacije u Docker containeru koristeći kreiranu sliku**
+   - Pokrenite Docker container pomoću kreirane slike:
      ```sh
      docker run -d -p 5001:8080 reklamacija
      ```
-
-
