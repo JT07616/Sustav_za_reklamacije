@@ -42,7 +42,7 @@ Aplikacija "Sustav za reklamacije" omogućava korisnicima jednostavno praćenje 
 4. **Pokretanje aplikacije u Docker containeru**
    - Pokrenite Docker container koristeći kreiranu sliku:
      ```sh
-     docker run -d -p 8000:8000 naziv-slike
+     docker run -d -p 5001:8080 naziv-slike
      ```
 
 
