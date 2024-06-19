@@ -19,6 +19,30 @@ Aplikacija "Sustav za reklamacije" omogućava korisnicima jednostavno praćenje 
 - **Brisanje reklamacija**: Omogućava korisniku brisanje određenih reklamacija iz sustava.
 - **Vizualizacija reklamacija**: Omogućava korisniku pregled grafičkih prikaza podataka o reklamacijama.
 
+## Pokretanje aplikacije
 
+1. **Preuzimanje aplikacije s GitHub-a**
+   - Klonirajte repozitorij na svoje računalo koristeći Git:
+     ```sh
+     git clone https://github.com/korisnicko-ime/naziv-repozitorija.git
+     ```
+
+2. **Ulazak u direktorij**
+   - Uđite u direktorij u koji ste klonirali repozitorij:
+     ```sh
+     cd naziv-repozitorija
+     ```
+
+3. **Kreiranje Docker slike**
+   - Kreirajte Docker sliku pomoću Dockerfile-a:
+     ```sh
+     docker build -t naziv-slike .
+     ```
+
+4. **Pokretanje aplikacije u Docker containeru**
+   - Pokrenite Docker container koristeći kreiranu sliku:
+     ```sh
+     docker run -d -p 8000:8000 naziv-slike
+     ```
 
 
