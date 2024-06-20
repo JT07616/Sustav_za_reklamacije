@@ -27,6 +27,19 @@
             </div>
         </div>
 
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-messages">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
         <div class="sort-filter">
             <label for="sortSelect">Sortiraj po:</label>
             <select id="sortSelect" name="sort" class="form-control" onchange="sortReklamacije()">
@@ -38,12 +51,9 @@
             </select>
         </div>
 
-        <div id="addForm" class="form-popup" style="display: {{ 'block' if add_error else 'none' }};">
+        <div id="addForm" class="form-popup" style="display: none;">
             <form method="POST" class="form-container">
                 <h2>Dodaj Reklamaciju</h2>
-                {% if add_error %}
-                <div class="error-message">{{ add_error }}</div>
-                {% endif %}
                 <label for="id_reklamacije">ID Reklamacije:</label>
                 <input type="number" id="id_reklamacije" name="id_reklamacije" required>
 
@@ -70,12 +80,9 @@
             </form>
         </div>
 
-        <div id="searchForm" class="form-popup" style="display: {{ 'block' if search_error else 'none' }};">
+        <div id="searchForm" class="form-popup" style="display: none;">
             <form method="POST" class="form-container" action="/reklamacije">
                 <h2>Pretraži Reklamaciju</h2>
-                {% if search_error %}
-                <div class="error-message">{{ search_error }}</div>
-                {% endif %}
                 <label for="search_id_reklamacije">ID Reklamacije:</label>
                 <input type="number" id="search_id_reklamacije" name="id_reklamacije" value="{{ search_values['id_reklamacije'] if search_values['id_reklamacije'] else '' }}">
 
@@ -132,12 +139,9 @@
         {% endif %}
     </div>
 
-    <div id="editForm" class="form-popup" style="display: {{ 'block' if edit_error else 'none' }};">
+    <div id="editForm" class="form-popup" style="display: none;">
         <form method="POST" class="form-container" action="{{ url_for('uredi_reklamaciju', id=0) }}" id="editFormContainer">
             <h2>Uredi Reklamaciju</h2>
-            {% if edit_error %}
-            <div class="error-message">{{ edit_error }}</div>
-            {% endif %}
             <input type="hidden" id="edit_id_reklamacije" name="id_reklamacije">
 
             <label for="edit_broj_narudzbe">Broj Narudžbe:</label>
