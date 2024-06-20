@@ -15,7 +15,7 @@ Aplikacija "Sustav za reklamacije" omogućava korisnicima jednostavno praćenje 
 ## Funkcionalnosti
 
 - **Unos reklamacija**: Omogućava korisniku unos novih reklamacija u sustav.
-- **Pretraživanje reklamacija**: Omogućava korisniku pregled reklamacija na temelju unesenih parametara.
+- **Pretraživanje reklamacija**: Omogućava korisniku pretraživanje reklamacija na temelju unesenih parametara.
 - **Sortiranje reklamacija**: Omogućava korisniku sortiranje reklamacija prema datumu ili broju narudžbe.
 - **Uređivanje reklamacija**: Omogućava korisniku ažuriranje informacija za odabrane reklamacije.
 - **Brisanje reklamacija**: Omogućava korisniku brisanje određenih reklamacija iz sustava.
