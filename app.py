@@ -1,10 +1,11 @@
 import os
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 from pony.orm import Database, Required, PrimaryKey, db_session, select, desc
 from datetime import datetime
 import calendar
 
 app = Flask(__name__)
+app.secret_key = 'supersecretkey'
 db = Database()
 
 class Reklamacija(db.Entity):
@@ -28,9 +29,6 @@ def index():
 @app.route('/reklamacije', methods=['GET', 'POST'])
 @db_session
 def reklamacija():
-    add_error = None
-    search_error = None
-    sort = request.args.get('sort')
     search_values = {
         'id_reklamacije': request.form.get(
             'id_reklamacije') if request.method == 'POST' and 'search' in request.form else '',
@@ -53,10 +51,9 @@ def reklamacija():
                 reklamacije = reklamacije.filter(lambda r: r.status == search_values['status'])
             reklamacije = reklamacije[:]
             if not reklamacije:
-                search_error = "Niti jedna reklamacija ne odgovara traženim vrijednostima."
+                flash("Niti jedna reklamacija ne odgovara traženim vrijednostima.", "danger")
                 reklamacije = None
-            return render_template('reklamacija.html', reklamacije=reklamacije, add_error=add_error,
-                                   search_error=search_error, search_values=search_values, is_search=True)
+            return render_template('reklamacija.html', reklamacije=reklamacije, search_values=search_values, is_search=True)
         else:
             try:
                 id_reklamacije = int(request.form['id_reklamacije'])
@@ -71,10 +68,11 @@ def reklamacija():
                 Reklamacija(id_reklamacije=id_reklamacije, broj_narudzbe=broj_narudzbe, kupac=kupac,
                             datum_reklamacije=datum_reklamacije, opis=opis, status=status)
                 db.commit()
+                flash("Reklamacija je uspješno dodana.", "success")
             except Exception as e:
-                add_error = str(e)
+                flash(str(e), "danger")
     else:
-        if sort:
+        if sort := request.args.get('sort'):
             if sort == 'datum_asc':
                 reklamacije = reklamacije.order_by(Reklamacija.datum_reklamacije)
             elif sort == 'datum_desc':
@@ -85,32 +83,26 @@ def reklamacija():
                 reklamacije = reklamacije.order_by(desc(Reklamacija.broj_narudzbe))
         reklamacije = reklamacije[:]
 
-    return render_template('reklamacija.html', reklamacije=reklamacije, add_error=add_error, search_error=search_error,
-                           search_values=search_values, is_search=False)
+    return render_template('reklamacija.html', reklamacije=reklamacije, search_values=search_values, is_search=False)
 
 
 @app.route('/uredi/<int:id>', methods=['POST'])
 @db_session
 def uredi_reklamaciju(id):
-    error_message = None
     try:
         reklamacija = Reklamacija.get(id_reklamacije=id)
         if not reklamacija:
-            error_message = "Reklamacija nije pronađena"
-            raise ValueError(error_message)
+            raise ValueError("Reklamacija nije pronađena")
 
         reklamacija.broj_narudzbe = int(request.form['broj_narudzbe'])
         reklamacija.kupac = request.form['kupac']
         reklamacija.datum_reklamacije = datetime.strptime(request.form['datum_reklamacije'], '%Y-%m-%dT%H:%M')
         reklamacija.opis = request.form['opis']
         reklamacija.status = request.form['status']
-        return render_template('reklamacija.html', reklamacije=[reklamacija], edit_reklamacija=None,
-                               add_error=None, edit_error=None, search_error=None, search_values={}, is_search=True)
+        flash("Reklamacija je uspješno ažurirana.", "success")
     except Exception as e:
-        print(e)
-        reklamacije = select(r for r in Reklamacija)[:]
-        return render_template('reklamacija.html', reklamacije=reklamacije, edit_reklamacija=reklamacija,
-                               add_error=None, edit_error=str(e), search_error=None)
+        flash(str(e), "danger")
+    return redirect(url_for('reklamacija'))
 
 
 @app.route('/obrisi/<int:id>', methods=['POST'])
@@ -121,10 +113,11 @@ def obrisi_reklamaciju(id):
         if reklamacija:
             reklamacija.delete()
             db.commit()
+            flash("Reklamacija je uspješno obrisana.", "success")
         else:
             raise ValueError("Reklamacija nije pronađena")
     except Exception as e:
-        print(e)
+        flash(str(e), "danger")
     return redirect(url_for('reklamacija'))
 
 
